@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ashtang Ayurved | Sitapur - Specialized Ayurvedic Clinic</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-green: #1b3d2f; 
+            --accent-gold: #c5a059;   
+            --bg-cream: #fdfaf5;      
+            --text-dark: #2c2c2c;
+            --white: #ffffff;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Poppins', sans-serif; background-color: var(--bg-cream); color: var(--text-dark); line-height: 1.6; scroll-behavior: smooth; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+        /* Navigation */
+        .navbar { background: var(--primary-green); padding: 15px 0; position: sticky; top: 0; z-index: 1000; border-bottom: 3px solid var(--accent-gold); }
+        .navbar .container { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--white); }
+        .logo span { color: var(--accent-gold); }
+        .location-tag { color: #a0aec0; font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; }
+        .nav-links { display: flex; list-style: none; align-items: center; }
+        .nav-links li { margin-left: 30px; }
+        .nav-links li a { text-decoration: none; color: var(--white); font-size: 0.85rem; font-weight: 600; transition: 0.3s; }
+        .btn-cta { background: var(--accent-gold); color: var(--primary-green) !important; padding: 12px 24px; border-radius: 4px; font-weight: 700; text-transform: uppercase; }
+
+        /* Hero */
+        .hero { height: 70vh; background: linear-gradient(rgba(27, 61, 47, 0.85), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=1600&q=80') center/cover; display: flex; align-items: center; color: var(--white); text-align: center; }
+        .hero h2 { font-family: 'Playfair Display', serif; font-size: 3.5rem; margin-bottom: 10px; }
+        .hero h2 span { color: var(--accent-gold); }
+
+        /* About Doctor */
+        .about-doctor { padding: 80px 0; background: var(--white); }
+        .doctor-flex { display: flex; align-items: center; gap: 60px; flex-wrap: wrap; }
+        .doctor-image img { width: 100%; max-width: 450px; border-radius: 15px; border: 10px solid var(--bg-cream); box-shadow: 20px 20px 0px var(--accent-gold); }
+        .doctor-info { flex: 1.5; min-width: 300px; }
+        .doctor-info h2 { font-family: 'Playfair Display', serif; font-size: 2.8rem; color: var(--primary-green); margin-bottom: 10px; }
+
+        /* Map Section */
+        .location-section { padding: 80px 0; background: #eef2ef; }
+        .map-flex { display: grid; grid-template-columns: 1.2fr 1fr; gap: 40px; }
+        .map-container iframe { width: 100%; height: 450px; border-radius: 15px; border: 0; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .contact-card { background: var(--white); padding: 40px; border-radius: 15px; border-top: 5px solid var(--accent-gold); }
+        .contact-card h3 { color: var(--primary-green); margin-bottom: 20px; font-family: 'Playfair Display', serif; font-size: 1.8rem; }
+        .contact-item { margin-bottom: 15px; font-size: 1.1rem; }
+
+        /* Footer & WA */
+        footer { background: #111; color: #ccc; padding: 40px 0; text-align: center; }
+        .wa-float { position: fixed; bottom: 25px; right: 25px; background: #25d366; width: 60px; height: 60px; border-radius: 50px; display: flex; align-items: center; justify-content: center; z-index: 1001; }
+
+        @media (max-width: 768px) { 
+            .nav-links { display: none; } 
+            .map-flex { grid-template-columns: 1fr; }
+            .hero h2 { font-size: 2.2rem; }
+        }
+.feedback-section { padding: 80px 0; background: var(--bg-cream); }
+.feedback-container { display: grid; grid-template-columns: 1fr 1.5fr; gap: 40px; }
+
+.feedback-form { 
+    background: var(--white); 
+    padding: 30px; 
+    border-radius: 15px; 
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05); 
+}
+
+/* Star Rating System */
+.star-rating {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    margin-bottom: 15px;
+}
+.star-rating input { display: none; }
+.star-rating label {
+    font-size: 30px;
+    color: #ccc;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.star-rating input:checked ~ label,
+.star-rating label:hover,
+.star-rating label:hover ~ label { color: var(--accent-gold); }
+
+.reviews-display { 
+    max-height: 450px; 
+    overflow-y: auto; 
+    padding-right: 10px; 
+}
+
+.review-item {
+    background: var(--white);
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    border-left: 5px solid var(--primary-green);
+    animation: fadeIn 0.5s ease-in;
+}
+
+.review-stars { color: var(--accent-gold); font-size: 1.2rem; margin-bottom: 5px; }
+
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+@media (max-width: 768px) { .feedback-container { grid-template-columns: 1fr; } }
+
+.faq-section { padding: 80px 0; background: var(--white); }
+.faq-container { max-width: 800px; margin: 0 auto; }
+
+.faq-item {
+    border-bottom: 1px solid #eee;
+    margin-bottom: 10px;
+}
+
+.faq-question {
+    width: 100%;
+    padding: 20px;
+    background: none;
+    border: none;
+    text-align: left;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--primary-green);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: 0.3s;
+}
+
+.faq-question:hover { color: var(--accent-gold); }
+
+.faq-answer {
+    padding: 0 20px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+    background: var(--bg-cream);
+    border-radius: 5px;
+}
+
+.faq-answer p { padding: 20px 0; color: #555; font-size: 0.95rem; }
+
+/* Class to show the answer */
+.faq-item.active .faq-answer { max-height: 200px; }
+.faq-item.active .faq-question span { transform: rotate(45deg); color: var(--accent-gold); }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo-area">
+                <h1 class="logo">Ashtang <span>Ayurved</span></h1>
+                <p class="location-tag">Sitapur, Uttar Pradesh</p>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">HOME</a></li>
+                <li><a href="#about">THE DOCTOR</a></li>
+                <li><a href="#location">FIND US</a></li>
+                <li><a href="https://wa.me/919876543210" class="btn-cta">Book Consultation</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header id="home" class="hero">
+        <div class="container">
+            <h2>Ancient Wisdom for <br><span>Modern Healing</span></h2>
+            <p>Specialized Ayurvedic treatments for chronic diseases in Sitapur.</p>
+        </div>
+    </header>
+
+    <section id="about" class="about-doctor">
+        <div class="container">
+            <div class="doctor-flex">
+                <div class="doctor-image">
+                    <img src="D:\Ashtang Ayurved\dr .jpeg" alt="Doctor Photo">
+                </div>
+                <div class="doctor-info">
+                    <h4>Expert Care</h4>
+                    <h2>Ashtang Ayurved Specialist</h2>
+                    <p>Offering world-class Ayurvedic procedures right in the heart of Sitapur. We specialize in <strong>Panchkarma, Agni Karma, and Leech Therapy</strong> for holistic recovery.</p>
+                    <br>
+                    <a href="tel:+919876543210" class="btn-cta" style="text-decoration:none;">Call for Appointment</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="location" class="location-section">
+        <div class="container">
+            <h2 style="text-align:center; font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--primary-green); margin-bottom: 40px;">Visit Our Clinic</h2>
+            <div class="map-flex">
+                <div class="map-container">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3536.84894495023!2d80.6725487749181!3d27.567198131659858!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399ed7002615977b%3A0xf498e1e6c9c379ab!2sAshtang%20Ayurveda%20clinic!5e0!3m2!1sen!2sin!4v1774326157477!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+<section id="faq" class="faq-section">
+    <div class="container">
+        <h2 class="section-title">Frequently Asked Questions</h2>
+        <div class="faq-container">
+            <div class="faq-item">
+                <button class="faq-question">What is Agni Karma and is it painful? <span>+</span></button>
+                <div class="faq-answer">
+                    <p>Agni Karma is a traditional thermal micro-cautery technique. While it involves heat, it is performed with precision. Most patients in our Sitapur clinic describe it as a minor "pinprick" sensation, providing almost instant relief for chronic pain like Sciatica or Joint pain.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">How does Leech Therapy work? <span>+</span></button>
+                <div class="faq-answer">
+                    <p>Leech Therapy (Jalaukavacharana) involves using medicinal leeches to remove localized impure blood and inject healing enzymes. It is highly effective for skin diseases, varicose veins, and non-healing ulcers.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">How many sessions of Panchkarma do I need? <span>+</span></button>
+                <div class="faq-answer">
+                    <p>The number of sessions depends entirely on your body type (Prakriti) and the severity of the disease. Typically, a standard detox cycle lasts 7 to 21 days. We recommend a consultation for a personalized plan.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <button class="faq-question">Do you treat all chronic diseases? <span>+</span></button>
+                <div class="faq-answer">
+                    <p>Yes, at Ashtang Ayurved, we provide management for lifestyle disorders, digestive issues, respiratory problems, and skin conditions using 100% natural Ayurvedic protocols.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+                <div class="contact-card">
+                    <h3>Contact Information</h3>
+                    <div class="contact-item"><strong>📍 Address:</strong> House no 43, infront of SBI agri bank, Civil Lines, near by siddheswar nath mandir, Prem Nagar, Sitapur, Uttar Pradesh 261001</div>
+                    <div class="contact-item"><strong>📞 Phone:</strong> +91 98765-XXXXX</div>
+                    <div class="contact-item"><strong>✉️ Email:</strong> info@ashtangayurved.com</div>
+                    <div class="contact-item"><strong>⏰ Hours:</strong> Mon - Sat: 10 AM - 7 PM</div>
+                    <br>
+                    <p style="color: #666; font-size: 0.9rem;">*Prior booking is highly recommended for Panchkarma and Agni Karma sessions.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <a href="https://wa.me/919876543210" class="wa-float" target="_blank">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" width="35" alt="WhatsApp">
+    </a>
+<section id="feedback" class="feedback-section">
+    <div class="container">
+        <h2 class="section-title">Patient Feedback</h2>
+        
+        <div class="feedback-container">
+            <div class="feedback-form">
+                <h3>Leave a Review</h3>
+                <div class="star-rating">
+                    <input type="radio" name="stars" id="star5" value="5"><label for="star5">★</label>
+                    <input type="radio" name="stars" id="star4" value="4"><label for="star4">★</label>
+                    <input type="radio" name="stars" id="star3" value="3"><label for="star3">★</label>
+                    <input type="radio" name="stars" id="star2" value="2"><label for="star2">★</label>
+                    <input type="radio" name="stars" id="star1" value="1"><label for="star1">★</label>
+                </div>
+                <input type="text" id="reviewerName" placeholder="Your Name" required>
+                <textarea id="reviewerText" placeholder="Share your healing experience..." rows="3" required></textarea>
+                <button type="button" class="btn-send" onclick="addReview()">Submit Review</button>
+            </div>
+
+            <div class="reviews-display" id="reviewsDisplay">
+                <div class="review-item">
+                    <div class="review-stars">★★★★★</div>
+                    <p>"The Agni Karma treatment for my joint pain was miraculous. Highly recommend Ashtang Ayurved!"</p>
+                    <small>- Amit Sharma, Sitapur</small>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+    <footer>
+        <p>&copy; 2026 Ashtang Ayurved, Sitapur. Bringing Health Naturally.</p>
+    </footer>
+<script>
+function addReview() {
+    const name = document.getElementById('reviewerName').value;
+    const text = document.getElementById('reviewerText').value;
+    const starInput = document.querySelector('input[name="stars"]:checked');
+    
+    if(!name || !text || !starInput) {
+        alert("Please provide your name, a review, and a star rating.");
+        return;
+    }
+
+    const stars = "★".repeat(starInput.value);
+    const display = document.getElementById('reviewsDisplay');
+
+    // Create a new review element
+    const newReview = document.createElement('div');
+    newReview.className = 'review-item';
+    newReview.innerHTML = `
+        <div class="review-stars">${stars}</div>
+        <p>"${text}"</p>
+        <small>- ${name}</small>
+    `;
+
+    // Add to the top of the list
+    display.prepend(newReview);
+
+    // Clear the form
+    document.getElementById('reviewerName').value = '';
+    document.getElementById('reviewerText').value = '';
+    starInput.checked = false;
+}
+
+// FAQ Accordion Logic
+document.querySelectorAll('.faq-question').forEach(button => {
+    button.addEventListener('click', () => {
+        const faqItem = button.parentElement;
+        
+        // Close other items
+        document.querySelectorAll('.faq-item').forEach(item => {
+            if (item !== faqItem) item.classList.remove('active');
+        });
+
+        // Toggle current item
+        faqItem.classList.toggle('active');
+    });
+});
+</script>
+</body>
+</html>
