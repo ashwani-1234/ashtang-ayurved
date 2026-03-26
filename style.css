@@ -1,0 +1,483 @@
+:root {
+    --primary-green: #1b3d2f; 
+    --accent-gold: #c5a059;   
+    --bg-cream: #fdfaf5;      
+    --text-dark: #2c2c2c;
+    --white: #ffffff;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body { 
+    font-family: 'Poppins', sans-serif; 
+    background-color: var(--bg-cream); 
+    color: var(--text-dark); 
+    line-height: 1.6; 
+    scroll-behavior: smooth; 
+}
+
+.container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+/* Navigation */
+.navbar { background: var(--primary-green); padding: 15px 0; position: sticky; top: 0; z-index: 1000; border-bottom: 3px solid var(--accent-gold); }
+.navbar .container { display: flex; justify-content: space-between; align-items: center; }
+.logo { font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--white); }
+.logo span { color: var(--accent-gold); }
+.location-tag { color: #a0aec0; font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; }
+.nav-links { display: flex; list-style: none; align-items: center; }
+.nav-links li { margin-left: 30px; }
+.nav-links li a { text-decoration: none; color: var(--white); font-size: 0.85rem; font-weight: 600; transition: 0.3s; }
+.btn-cta { 
+    background: var(--accent-gold); 
+    color: var(--primary-green) !important; 
+    padding: 12px 24px; 
+    border-radius: 4px; 
+    font-weight: 700; 
+    text-transform: uppercase; 
+    border: none;
+    cursor: pointer;
+}
+
+/* Hero */
+.hero { height: 70vh; background: linear-gradient(rgba(27, 61, 47, 0.85), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=1600&q=80') center/cover; display: flex; align-items: center; color: var(--white); text-align: center; }
+.hero h2 { font-family: 'Playfair Display', serif; font-size: 3.5rem; margin-bottom: 10px; width: 100%; }
+.hero h2 span { color: var(--accent-gold); }
+
+/* About Doctor */
+.about-doctor { padding: 80px 0; background: var(--white); }
+.doctor-flex { display: flex; align-items: center; gap: 60px; flex-wrap: wrap; }
+.doctor-image img { width: 100%; max-width: 450px; border-radius: 15px; border: 10px solid var(--bg-cream); box-shadow: 20px 20px 0px var(--accent-gold); }
+.doctor-info { flex: 1.5; min-width: 300px; }
+.doctor-info h2 { font-family: 'Playfair Display', serif; font-size: 2.8rem; color: var(--primary-green); margin-bottom: 10px; }
+
+/* Map & Contact */
+.location-section { padding: 80px 0; background: #eef2ef; }
+.map-flex { display: grid; grid-template-columns: 1.2fr 1fr; gap: 40px; margin-bottom: 40px; }
+.map-container iframe { width: 100%; height: 450px; border-radius: 15px; border: 0; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+.contact-card { background: var(--white); padding: 40px; border-radius: 15px; border-top: 5px solid var(--accent-gold); }
+.contact-card h3 { color: var(--primary-green); margin-bottom: 20px; font-family: 'Playfair Display', serif; font-size: 1.8rem; }
+.contact-item { margin-bottom: 15px; font-size: 1.1rem; }
+
+/* FAQ */
+.faq-section { padding: 80px 0; background: var(--white); }
+.section-title { text-align: center; font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--primary-green); margin-bottom: 40px; }
+.faq-container { max-width: 800px; margin: 0 auto; }
+.faq-item { border-bottom: 1px solid #eee; margin-bottom: 10px; }
+.faq-question { width: 100%; padding: 20px; background: none; border: none; text-align: left; font-size: 1.1rem; font-weight: 600; color: var(--primary-green); cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+.faq-answer { padding: 0 20px; max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background: var(--bg-cream); border-radius: 5px; }
+.faq-answer p { padding: 20px 0; color: #555; }
+.faq-item.active .faq-answer { max-height: 200px; }
+
+/* Feedback */
+.feedback-section { padding: 80px 0; background: var(--bg-cream); }
+.feedback-container { display: grid; grid-template-columns: 1fr 1.5fr; gap: 40px; }
+.feedback-form { background: var(--white); padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+.feedback-form input, .feedback-form textarea { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 5px; font-family: inherit; }
+
+.star-rating { display: flex; flex-direction: row-reverse; justify-content: flex-end; margin-bottom: 15px; }
+.star-rating input { display: none; }
+.star-rating label { font-size: 30px; color: #ccc; cursor: pointer; transition: 0.3s; }
+.star-rating input:checked ~ label, .star-rating label:hover, .star-rating label:hover ~ label { color: var(--accent-gold); }
+
+.reviews-display { max-height: 450px; overflow-y: auto; }
+.review-item { background: var(--white); padding: 20px; border-radius: 10px; margin-bottom: 20px; border-left: 5px solid var(--primary-green); animation: fadeIn 0.5s ease-in; }
+.review-stars { color: var(--accent-gold); }
+
+/* Footer & Floating Button */
+footer { background: #111; color: #ccc; padding: 40px 0; text-align: center; }
+.wa-float { position: fixed; bottom: 25px; right: 25px; background: #25d366; width: 60px; height: 60px; border-radius: 50px; display: flex; align-items: center; justify-content: center; z-index: 1001; }
+
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+@media (max-width: 768px) { 
+    .nav-links { display: none; } 
+    .map-flex, .feedback-container { grid-template-columns: 1fr; }
+    .hero h2 { font-size: 2.2rem; }
+}
+
+.services-section {
+    padding: 100px 0;
+    background-color: var(--white);
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 50px;
+}
+
+.service-card {
+    background: var(--bg-cream);
+    padding: 40px;
+    border-radius: 20px;
+    border: 1px solid rgba(197, 160, 89, 0.1); /* Subtle gold border */
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+/* The "Soft Lift" Hover */
+.service-card:hover {
+    transform: translateY(-12px);
+    background: var(--white);
+    box-shadow: 0 20px 40px rgba(27, 61, 47, 0.08);
+    border-color: var(--accent-gold);
+}
+
+.service-icon {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    display: inline-block;
+}
+
+.service-card h3 {
+    font-family: 'Playfair Display', serif;
+    color: var(--primary-green);
+    font-size: 1.6rem;
+    margin-bottom: 15px;
+}
+
+.service-card p {
+    font-size: 0.95rem;
+    color: #555;
+    margin-bottom: 25px;
+    flex-grow: 1;
+}
+
+/* Service Tags */
+.service-tags {
+    display: flex;
+    gap: 10px;
+    list-style: none;
+}
+
+.service-tags li {
+    background: rgba(197, 160, 89, 0.15);
+    color: var(--primary-green);
+    padding: 5px 12px;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.trust-banner {
+    margin-top: -50px; /* Pulls the banner up into the hero section */
+    position: relative;
+    z-index: 10;
+    padding: 0 20px;
+}
+
+.banner-flex {
+    background: var(--white);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 15px 35px rgba(27, 61, 47, 0.1);
+    border-bottom: 4px solid var(--accent-gold);
+}
+
+.trust-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    text-align: left;
+}
+
+.trust-icon {
+    font-size: 2rem;
+    background: rgba(197, 160, 89, 0.1);
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+}
+
+.trust-text h4 {
+    color: var(--primary-green);
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 2px;
+}
+
+.trust-text p {
+    color: #777;
+    font-size: 0.85rem;
+    margin: 0;
+}
+
+.trust-divider {
+    width: 1px;
+    height: 50px;
+    background: #eee;
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+    .banner-flex {
+        flex-wrap: wrap;
+        gap: 30px;
+    }
+    .trust-divider {
+        display: none;
+    }
+    .trust-item {
+        width: 45%;
+    }
+}
+
+@media (max-width: 600px) {
+    .trust-banner { margin-top: -30px; }
+    .trust-item { width: 100%; }
+}
+
+.scroll-btn {
+    position: fixed;
+    bottom: 100px; /* Placed above the WhatsApp button */
+    right: 25px;
+    width: 50px;
+    height: 50px;
+    background-color: var(--primary-green);
+    color: var(--accent-gold);
+    border: 2px solid var(--accent-gold);
+    border-radius: 50%;
+    cursor: pointer;
+    display: none; /* Hidden by default */
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    z-index: 1000;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.scroll-btn:hover {
+    background-color: var(--accent-gold);
+    color: var(--primary-green);
+    transform: translateY(-5px);
+}
+
+.arrow-up {
+    line-height: 0;
+    margin-bottom: 4px;
+}
+/* WhatsApp Greeting Styles 
+.wa-greeting {
+    position: fixed;
+    bottom: 95px; /* Positioned right above the WA button */
+    right: 25px;
+    width: 260px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    padding: 15px;
+    font-size: 0.85rem;
+    z-index: 1000;
+    display: none; /* Hidden initially */
+    animation: slideIn 0.5s ease forwards;
+    border-left: 4px solid #25d366;
+}
+
+.wa-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.wa-status {
+    color: #25d366;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.wa-greeting p {
+    margin: 0;
+    color: #444;
+    line-height: 1.4;
+}
+
+/* The little "tail" of the chat bubble */
+.wa-triangle {
+    position: absolute;
+    bottom: -10px;
+    right: 20px;
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 10px solid white;
+}
+
+@keyframes slideIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}*/
+
+footer {
+    background: #111;
+    color: #999;
+    padding: 60px 0 30px;
+    text-align: center;
+}
+
+.footer-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.footer-disclaimer h4 {
+    color: var(--accent-gold);
+    font-size: 1rem;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.footer-disclaimer p {
+    font-size: 0.85rem;
+    line-height: 1.6;
+    margin-bottom: 30px;
+    opacity: 0.8;
+}
+
+.footer-divider {
+    border: 0;
+    border-top: 1px solid #333;
+    margin: 20px 0;
+}
+
+.copyright {
+    font-size: 0.8rem;
+}
+
+.copyright a {
+    color: var(--accent-gold);
+    text-decoration: none;
+}
+
+.copyright a:hover {
+    text-decoration: underline;
+}
+
+/* Logo Area Layout */
+.logo-area {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Space between icon and text */
+}
+
+.header-logo {
+    height: 60px; /* Adjust size to fit your navbar height */
+    width: auto;
+    /* This magic line makes the white background of your PNG transparent */
+    mix-blend-mode: multiply; 
+    filter: brightness(1.1); /* Optional: makes the logo colors pop slightly */
+}
+
+.logo-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.logo {
+    line-height: 1; /* Tightens the gap between name and location tag */
+    margin-bottom: 2px;
+}
+
+/* Ensure the navbar has enough height for the logo */
+.navbar {
+    padding: 10px 0; 
+}
+
+/* Mobile Tweak */
+@media (max-width: 480px) {
+    .header-logo {
+        height: 45px;
+    }
+    .logo {
+        font-size: 1.4rem;
+    }
+}
+
+
+
+/* Navbar Layout Fix */
+.navbar-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.logo-area {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0; /* Prevents logo from being squashed */
+}
+
+.header-logo {
+    height: 55px; /* Perfect height for the navbar */
+    width: auto;
+    mix-blend-mode: multiply; /* Removes white background from PNG */
+    display: block;
+}
+
+.logo-text {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.logo {
+    font-size: 1.4rem !important; /* Forces consistent font size */
+    margin: 0 !important;
+    line-height: 1.1;
+}
+
+.location-tag {
+    font-size: 0.65rem !important;
+    margin: 0;
+    letter-spacing: 1px;
+    color: #a0aec0;
+}
+
+/* Links and Button Fix */
+.nav-links {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+}
+
+.nav-links li {
+    margin-left: 25px;
+    white-space: nowrap; /* Prevents text from wrapping */
+}
+
+.btn-cta {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px !important;
+    height: auto !important; /* Fixes the "stretched" button look */
+    text-decoration: none;
+    line-height: 1;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none; /* Hides links on mobile as per original design */
+    }
+}
