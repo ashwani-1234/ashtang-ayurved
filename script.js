@@ -103,3 +103,17 @@ document.querySelectorAll('.nav-links a').forEach(link => {
         navLinks.classList.remove('active');
     });
 });
+
+window.addEventListener('load', () => {
+    const preloader = document.getElementById('preloader');
+    
+    // Small delay to ensure the animation feels smooth
+    setTimeout(() => {
+        preloader.classList.add('preloader-hidden');
+        
+        // Completely remove from DOM after fade out
+        setTimeout(() => {
+            preloader.style.display = 'none';
+        }, 500);
+    }, 1000); 
+});
