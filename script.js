@@ -104,16 +104,19 @@ document.querySelectorAll('.nav-links a').forEach(link => {
     });
 });
 
-window.addEventListener('load', () => {
+// Function to hide the preloader
+function hidePreloader() {
     const preloader = document.getElementById('preloader');
-    
-    // Small delay to ensure the animation feels smooth
-    setTimeout(() => {
+    if (preloader) {
         preloader.classList.add('preloader-hidden');
-        
-        // Completely remove from DOM after fade out
         setTimeout(() => {
             preloader.style.display = 'none';
         }, 500);
-    }, 1000); 
-});
+    }
+}
+
+// Fix 1: Hide when everything is loaded
+window.addEventListener('load', hidePreloader);
+
+// Fix 2: Safety Timer - Hide after 3 seconds if 'load' event fails
+setTimeout(hidePreloader, 3000);
