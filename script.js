@@ -1,21 +1,43 @@
 /**
- * Function to handle new review submissions
+ * PRELOADER LOGIC (Moved to top for priority)
+ * Ensures the spinner hides even if images are broken or slow.
+ */
+function hidePreloader() {
+    const preloader = document.getElementById('preloader');
+    if (preloader) {
+        preloader.classList.add('preloader-hidden');
+        setTimeout(() => {
+            preloader.style.display = 'none';
+        }, 500);
+    }
+}
+
+// Safety: Hide after 3 seconds no matter what
+const preloaderTimeout = setTimeout(hidePreloader, 3000);
+
+// Hide when page is fully loaded
+window.addEventListener('load', () => {
+    clearTimeout(preloaderTimeout); // Stop the safety timer if load is fast
+    hidePreloader();
+});
+
+/**
+ * REVIEW SYSTEM
  */
 function addReview() {
     const nameInput = document.getElementById('reviewerName');
     const textInput = document.getElementById('reviewerText');
     const starInput = document.querySelector('input[name="stars"]:checked');
-    
-    // Validation
-    if(!nameInput.value || !textInput.value || !starInput) {
+    const display = document.getElementById('reviewsDisplay');
+
+    if(!nameInput || !textInput || !starInput || !display) return;
+
+    if(!nameInput.value || !textInput.value) {
         alert("Please provide your name, a review, and a star rating.");
         return;
     }
 
     const stars = "★".repeat(starInput.value);
-    const display = document.getElementById('reviewsDisplay');
-
-    // Create a new review element
     const newReview = document.createElement('div');
     newReview.className = 'review-item';
     newReview.innerHTML = `
@@ -24,106 +46,79 @@ function addReview() {
         <small>- ${nameInput.value}</small>
     `;
 
-    // Add to the top of the list
     display.prepend(newReview);
-
-    // Clear the form
     nameInput.value = '';
     textInput.value = '';
     starInput.checked = false;
 }
 
 /**
- * FAQ Accordion Toggle Logic
+ * FAQ ACCORDION
  */
 document.querySelectorAll('.faq-question').forEach(button => {
     button.addEventListener('click', () => {
         const faqItem = button.parentElement;
-        
-        // Close other items for a clean accordion effect
         document.querySelectorAll('.faq-item').forEach(item => {
-            if (item !== faqItem) {
-                item.classList.remove('active');
-            }
+            if (item !== faqItem) item.classList.remove('active');
         });
-
-        // Toggle the current item
         faqItem.classList.toggle('active');
     });
 });
 
-// Get the button
+/**
+ * SCROLL TO TOP (With Safety Check)
+ */
 const scrollBtn = document.getElementById("scrollToTop");
-
-// Show button when user scrolls down 300px
-window.onscroll = function() {
-    if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
-        scrollBtn.style.display = "flex";
-    } else {
-        scrollBtn.style.display = "none";
-    }
-};
-
-// Smooth scroll to top when clicked
-scrollBtn.addEventListener("click", () => {
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
+if (scrollBtn) {
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) {
+            scrollBtn.style.display = "flex";
+        } else {
+            scrollBtn.style.display = "none";
+        }
     });
-});
 
+    scrollBtn.addEventListener("click", () => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+}
+
+/**
+ * WHATSAPP GREETING (With Safety Check)
+ */
 window.addEventListener('load', () => {
     const greeting = document.getElementById('waGreeting');
+    const waFloat = document.querySelector('.wa-float');
     
-    // Show the greeting after 5 seconds
-    setTimeout(() => {
-        greeting.style.display = 'block';
-    }, 5000);
+    if (greeting) {
+        setTimeout(() => {
+            greeting.style.display = 'block';
+        }, 5000);
 
-    // Hide greeting if user clicks the WhatsApp button
-    document.querySelector('.wa-float').addEventListener('click', () => {
-        greeting.style.display = 'none';
-    });
-});
-
-
-const menuToggle = document.getElementById('menuToggle');
-const navLinks = document.getElementById('navLinks');
-
-// Toggle Menu Open/Close
-menuToggle.addEventListener('click', () => {
-    menuToggle.classList.toggle('active');
-    navLinks.classList.toggle('active');
-});
-
-// Auto-close menu when a link is clicked
-document.querySelectorAll('.nav-links a').forEach(link => {
-    link.addEventListener('click', () => {
-        menuToggle.classList.remove('active');
-        navLinks.classList.remove('active');
-    });
+        if (waFloat) {
+            waFloat.addEventListener('click', () => {
+                greeting.style.display = 'none';
+            });
+        }
+    }
 });
 
 /**
- * PRELOADER FAIL-SAFE LOGIC
- * This ensures the spinner hides even if the page 
- * has a broken image or slow connection.
+ * MOBILE MENU (With Safety Check)
  */
-function hidePreloader() {
-    const preloader = document.getElementById('preloader');
-    if (preloader) {
-        // Adds the fade-out class
-        preloader.classList.add('preloader-hidden');
-        
-        // Completely removes the element after the fade animation
-        setTimeout(() => {
-            preloader.style.display = 'none';
-        }, 500);
-    }
+const menuToggle = document.getElementById('menuToggle');
+const navLinks = document.getElementById('navLinks');
+
+if (menuToggle && navLinks) {
+    menuToggle.addEventListener('click', () => {
+        menuToggle.classList.toggle('active');
+        navLinks.classList.toggle('active');
+    });
+
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => {
+            menuToggle.classList.remove('active');
+            navLinks.classList.remove('active');
+        });
+    });
 }
-
-// Trigger 1: When the browser finishes loading everything
-window.addEventListener('load', hidePreloader);
-
-// Trigger 2: Safety Timer (Forces hide after 3 seconds)
-setTimeout(hidePreloader, 3000);

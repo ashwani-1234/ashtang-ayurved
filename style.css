@@ -503,41 +503,63 @@ footer {
     transition: all 0.3s ease;
 }
 
-/* Mobile Layout (Under 768px) */
+/* --- FIXED MOBILE RESPONSIVENESS --- */
 @media (max-width: 768px) {
-    .menu-toggle {
-        display: flex; /* Show hamburger on mobile */
-    }
-
+    /* Hide the default desktop horizontal display */
     .nav-links {
+        display: flex !important; /* Change from 'none' to 'flex' */
         position: fixed;
         top: 0;
-        right: -100%; /* Hidden off-screen by default */
+        right: -100%; /* Keeps it hidden off-screen */
         height: 100vh;
-        width: 70%;
+        width: 75%; /* Menu width on mobile */
         background-color: var(--primary-green);
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        transition: 0.4s ease;
+        transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         box-shadow: -10px 0 30px rgba(0,0,0,0.3);
         z-index: 1000;
     }
 
+    /* Pull the menu into view when active */
     .nav-links.active {
-        right: 0; /* Slide in when active */
+        right: 0; 
     }
 
     .nav-links li {
         margin: 20px 0;
+        margin-left: 0; /* Reset desktop margin */
     }
 
-    /* Animate Hamburger to 'X' when active */
-    .menu-toggle.active .bar:nth-child(1) { transform: translateY(9px) rotate(45deg); }
-    .menu-toggle.active .bar:nth-child(2) { opacity: 0; }
-    .menu-toggle.active .bar:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
+    .nav-links li a {
+        font-size: 1.2rem;
+    }
+
+    /* Show hamburger icon */
+    .menu-toggle {
+        display: flex;
+    }
+
+    /* Fix for other components on mobile */
+    .map-flex, .feedback-container { 
+        grid-template-columns: 1fr; 
+    }
+    .hero h2 { 
+        font-size: 2.2rem; 
+    }
 }
 
+/* --- HAMBURGER ICON ANIMATION --- */
+/* This ensures the icon stays on top of the menu when open */
+.menu-toggle.active {
+    position: relative;
+    z-index: 1001;
+}
+
+.menu-toggle.active .bar:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+.menu-toggle.active .bar:nth-child(2) { opacity: 0; }
+.menu-toggle.active .bar:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
 
 /* Preloader Styles */
 #preloader {
