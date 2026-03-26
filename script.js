@@ -104,19 +104,26 @@ document.querySelectorAll('.nav-links a').forEach(link => {
     });
 });
 
-// Function to hide the preloader
+/**
+ * PRELOADER FAIL-SAFE LOGIC
+ * This ensures the spinner hides even if the page 
+ * has a broken image or slow connection.
+ */
 function hidePreloader() {
     const preloader = document.getElementById('preloader');
     if (preloader) {
+        // Adds the fade-out class
         preloader.classList.add('preloader-hidden');
+        
+        // Completely removes the element after the fade animation
         setTimeout(() => {
             preloader.style.display = 'none';
         }, 500);
     }
 }
 
-// Fix 1: Hide when everything is loaded
+// Trigger 1: When the browser finishes loading everything
 window.addEventListener('load', hidePreloader);
 
-// Fix 2: Safety Timer - Hide after 3 seconds if 'load' event fails
+// Trigger 2: Safety Timer (Forces hide after 3 seconds)
 setTimeout(hidePreloader, 3000);
