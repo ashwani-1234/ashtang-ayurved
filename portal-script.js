@@ -140,3 +140,25 @@ function markDone(id) {
   const app = initializeApp(firebaseConfig);
   const analytics = getAnalytics(app);
 </script>
+
+async function addPatient(name, age, prakriti) {
+  try {
+    const docRef = await addDoc(collection(db, "patients"), {
+      name: name,
+      age: age,
+      prakriti: prakriti,
+      createdAt: new Date()
+    });
+    console.log("Patient added with ID: ", docRef.id);
+  } catch (e) {
+    console.error("Error adding patient: ", e);
+  }
+}
+
+async function getPatients() {
+  const querySnapshot = await getDocs(collection(db, "patients"));
+  querySnapshot.forEach((doc) => {
+    console.log(`${doc.id} => `, doc.data());
+    // You can use doc.data().name, doc.data().prakriti, etc.
+  });
+}
