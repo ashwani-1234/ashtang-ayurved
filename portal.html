@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Internal Portal | Ashtang Ayurved</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="portal-style.css">
+</head>
+<body>
+
+    <div class="portal-container">
+        <div id="loginSection" class="login-box">
+            <img src="अष्टांग_आयुर्वेद_क्लीनिक.png" alt="Logo" class="portal-logo">
+            <h2 class="portal-title">Internal Management</h2>
+            <div class="login-form">
+                <input type="password" id="passKey" placeholder="Enter Access Key">
+                <button onclick="checkLogin()" class="btn-portal">Access Dashboard</button>
+            </div>
+            <p class="login-footer">Private access for Ashtang Ayurved staff only.</p>
+        </div>
+
+        <div id="staffDash" class="dashboard">
+            <header class="dash-header">
+                <h3>Patient Registration (Reception)</h3>
+                <button onclick="logout()" class="btn-text">Logout</button>
+            </header>
+            
+            <div class="admin-card">
+                <form id="patientForm">
+                    <div class="form-grid">
+                        <div class="form-group"><label>Patient Name</label><input type="text" id="pName" required></div>
+                        <div class="form-group"><label>Age/Gender</label><input type="text" id="pAge" required></div>
+                        <div class="form-group"><label>Phone Number</label><input type="tel" id="pPhone" required></div>
+                        <div class="form-group"><label>Primary Complaint</label><input type="text" id="pComplaint" required></div>
+                        <div class="form-group full-width"><label>Observations / Medical History</label><textarea id="pHistory" rows="3"></textarea></div>
+                    </div>
+                    <button type="submit" class="btn-portal full-width">Send to Doctor's Queue</button>
+                </form>
+            </div>
+
+            <div class="admin-card">
+                <h4>Recent Visits</h4>
+                <div class="table-scroll">
+                    <table id="staffTable">
+                        <thead><tr><th>Time</th><th>Patient</th><th>Status</th></tr></thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div id="doctorDash" class="dashboard">
+            <header class="dash-header">
+                <h2 class="doctor-title">Consultation Room</h2>
+                <div class="search-box">
+                    <input type="tel" id="searchPhone" placeholder="Search Phone Number...">
+                    <button onclick="searchPatient()" class="btn-search">Search History</button>
+                    <button onclick="loadDoctorData()" class="btn-refresh">Live Queue</button>
+                </div>
+                <button onclick="logout()" class="btn-text">Logout</button>
+            </header>
+
+            <div id="doctorQueue">
+                </div>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+    <script src="portal-script.js"></script>
+
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-analytics.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const firebaseConfig = {
+    apiKey: "AIzaSyAeOjG-wXJE2q0GTUqe77P-IhBut17gsrY",
+    authDomain: "ashtangayurvedaclinic.firebaseapp.com",
+    projectId: "ashtangayurvedaclinic",
+    storageBucket: "ashtangayurvedaclinic.firebasestorage.app",
+    messagingSenderId: "88025281504",
+    appId: "1:88025281504:web:a3999614ad52b6f5ccf185",
+    measurementId: "G-6G67W403RZ"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+</script>
+</body>
+</html>
